@@ -1,0 +1,26 @@
+package com.finsoft.g2pg.test.testwallet.service;
+
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebResult;
+import jakarta.jws.WebService;
+import jakarta.jws.soap.SOAPBinding;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.ws.Action;
+
+@WebService(name = "TestWalletService", targetNamespace = "http://com.finsoft.g2pg")
+@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
+@XmlSeeAlso({
+    ObjectFactory.class
+})
+public interface TestWalletService {
+
+    @WebMethod(operationName = "Login")
+    @WebResult(name = "loginResponse", targetNamespace = "http://com.finsoft.g2pg", partName = "loginResponse")
+    @Action(input = "http://com.finsoft.g2pg/TestWalletService/LoginRequest", output = "http://com.finsoft.g2pg/TestWalletService/LoginResponse")
+    public LoginResponse login(
+        @WebParam(name = "loginRequest", targetNamespace = "http://com.finsoft.g2pg", partName = "loginRequest")
+        LoginRequest loginRequest);
+
+}
+
